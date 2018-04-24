@@ -62,7 +62,7 @@ def impWords(X,y,word_list,search_space = 300, max_bag = 200, num_appear_limit =
     feature_dic = {}
     n = 0 
     for i in feature_index:
-        for key, value in word_list.iteritems():    # for name, age in list.items():  (for Python 3.x)
+        for key, value in word_list.items():    # for name, age in list.items():  (for Python 3.x)
             if value == i:
                 if sum(X[:,i]) > num_appear_limit:
                     n+=1
@@ -114,7 +114,7 @@ def impWords_info_dic(X,y,word_list,search_space = 300, max_bag = 200, num_appea
     feature_dic = {}
     n = 0 
     for i in feature_index:
-        for key, value in word_list.iteritems():    # for name, age in list.items():  (for Python 3.x)
+        for key, value in word_list.items():    # for name, age in list.items():  (for Python 3.x)
             if value == i:
                 if sum(X[:,i]) > num_appear_limit:
                     n+=1
@@ -129,7 +129,7 @@ def impWords_info_dic(X,y,word_list,search_space = 300, max_bag = 200, num_appea
 
 def wordMap(info_gain_dic):
     print (info_gain_dic)
-    for word, gain in info_gain_dic.iteritems():
+    for word, gain in info_gain_dic.items():
         print ((word + " ") * int(gain*1000))
     
 ######################################################################

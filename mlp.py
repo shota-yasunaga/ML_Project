@@ -14,6 +14,7 @@ from util import make_test_train
 
 X_train, X_test, y_train, y_test, colnames = make_test_train()
 
+
 # Parameters
 learning_rate = 0.001
 training_epochs = 2000
@@ -23,7 +24,7 @@ display_step = 100
 # Network Parameters
 n_hidden_1 = 256 # 1st layer number of features
 n_hidden_2 = 256 # 2nd layer number of features
-n_input = 200 # MNIST data input (img shape: 28*28)
+n_input = 212 # MNIST data input (img shape: 28*28)
 n_classes = 2 # MNIST total classes (0-9 digits)
 
 # tf Graph input
@@ -75,7 +76,7 @@ with tf.Session() as sess:
         total_batch = int(len(y_train)/batch_size)
         # Loop over all batches
         for i in range(total_batch):
-            batch_x=X_train[i]
+            batch_x=tf.transpose(X_train[i])
             batch_y=y_train[i]
             # Run optimization op (backprop) and cost op (to get loss value)
             _, c = sess.run([optimizer, cost], feed_dict={x: batch_x,
