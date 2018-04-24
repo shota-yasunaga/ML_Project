@@ -10,10 +10,14 @@ Project: https://github.com/aymericdamien/TensorFlow-Examples/
 # Import MNIST data
 import tensorflow as tf
 from util import make_test_train 
+import numpy as np
+from sklearn import f1_score
 
 
-X_train, X_test, y_train, y_test, colnames = make_test_train()
-
+X_train, X_test, y_train, y_test = make_test_train()
+X_train = np.transpose(X_train)
+X_test  = np.transpose(X_test)
+y_test  = np.transpose(y_test)
 
 # Parameters
 learning_rate = 0.001
@@ -25,7 +29,7 @@ display_step = 100
 n_hidden_1 = 256 # 1st layer number of features
 n_hidden_2 = 256 # 2nd layer number of features
 n_input = 212 # MNIST data input (img shape: 28*28)
-n_classes = 2 # MNIST total classes (0-9 digits)
+n_classes = 1 # MNIST total classes (0-9 digits)
 
 # tf Graph input
 x = tf.placeholder("float", [None, n_input])
@@ -76,8 +80,8 @@ with tf.Session() as sess:
         total_batch = int(len(y_train)/batch_size)
         # Loop over all batches
         for i in range(total_batch):
-            batch_x=tf.transpose(X_train[i])
-            batch_y=y_train[i]
+            batch_x = np.reshape(X_train[:,i],(1,212))
+            batch_y=np.reshape(y_train[i],(1,1))
             # Run optimization op (backprop) and cost op (to get loss value)
             _, c = sess.run([optimizer, cost], feed_dict={x: batch_x,
                                                           y: batch_y})
@@ -93,4 +97,8 @@ with tf.Session() as sess:
     correct_prediction = tf.equal(tf.argmax(pred, 1), tf.argmax(y, 1))
     # Calculate accuracy
     accuracy = tf.reduce_mean(tf.cast(correct_prediction, "float"))
-    print("Accuracy:", accuracy.eval({x: X_test, y: y_test}))
+
+    print(sess.run(accuracy, feed_dict={x:X_test,y_:y_test}))
+    pred(X_test,)
+    print("f1_score", f1_score(y_true,))
+
