@@ -11,7 +11,7 @@ Project: https://github.com/aymericdamien/TensorFlow-Examples/
 import tensorflow as tf
 from util import make_test_train 
 import numpy as np
-from sklearn import f1_score
+from sklearn.metrics import f1_score
 
 
 X_train, X_test, y_train, y_test = make_test_train()
@@ -21,7 +21,7 @@ y_test  = np.transpose(y_test)
 
 # Parameters
 learning_rate = 0.001
-training_epochs = 2000
+training_epochs = 100
 batch_size = 1
 display_step = 100
 
@@ -94,11 +94,11 @@ with tf.Session() as sess:
     print("Optimization Finished!")
 
     # Test model
+#    pred = tf.nn.softmax(logits)
     correct_prediction = tf.equal(tf.argmax(pred, 1), tf.argmax(y, 1))
     # Calculate accuracy
     accuracy = tf.reduce_mean(tf.cast(correct_prediction, "float"))
 
     print(sess.run(accuracy, feed_dict={x:X_test,y_:y_test}))
     pred(X_test,)
-    print("f1_score", f1_score(y_true,))
 
